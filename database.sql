@@ -7,7 +7,7 @@ CREATE TABLE `users` (
 );
 
 CREATE TABLE `ads` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `user_id` integer,
   `title` varchar(255),
   `describtion` text,
