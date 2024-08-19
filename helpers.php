@@ -9,6 +9,13 @@ function dd($args)
     echo '</pre>';
     die();
 }
+function loadPartials(string $path, array|null $args = null): void
+{
+    if (is_array($args)) {
+        extract($args);
+    }
+    require basePath('/public/partials/'.$path.'.php');
+}
 
 function getAds(): array
 {
