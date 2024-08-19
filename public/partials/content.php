@@ -5,6 +5,7 @@
  * source: https://github.com/mfg888/Responsive-Tailwind-CSS-Grid/blob/main/index.html
  */
 ?>
+
 <div class="text-center p-10">
     <h1 class="font-bold text-4xl mb-4">Flats for rent</h1>
 </div>
@@ -48,6 +49,6 @@
                 </div>
             </a>
         </div>
-        <!--   🛑 Product card 1 - Ends Here  -->
-    <?php endforeach; ?>
+
+        <?php endforeach; ?>
 </section>
