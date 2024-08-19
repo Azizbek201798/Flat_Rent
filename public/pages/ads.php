@@ -1,10 +1,3 @@
-<?php
-/**
- * Credits:
- * https://tailwindflex.com/@arya/responsive-products-grid
- * source: https://github.com/mfg888/Responsive-Tailwind-CSS-Grid/blob/main/index.html
- */
-?>
 <div class="text-center p-10">
     <h1 class="font-bold text-4xl mb-4">Flats for rent</h1>
 </div>
@@ -13,7 +6,6 @@
     <?php
     foreach ($ads as $ad):
         ?>
-        <!--   ✅ Product card 1 - Starts Here 👇 -->
         <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
             <a href="#">
                 <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA"
@@ -47,6 +39,5 @@
                 </div>
             </a>
         </div>
-        <!--   🛑 Product card 1 - Ends Here  -->
     <?php endforeach; ?>
 </section>
