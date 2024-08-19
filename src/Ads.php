@@ -1,72 +1,89 @@
 <?php
+declare(strict_types=1);
 
 namespace App;
+
 use PDO;
-class Ads{
+
+class Ads
+{
     private PDO $pdo;
-    public function __construct(){
+
+    public function __construct()
+    {
         $this->pdo = DB::connect();
     }
 
     public function createAds(
-        int $user_id,
         string $title,
-        string $describtion,
-        int $status_id,
-        int $branch_id,
+        string $description,
+        int    $user_id,
+        int    $status_id,
+        int    $branch_id,
         string $address,
-        string $price,
-        string $rooms,
-        string $branch,
-    )
+        float  $price,
+        int    $rooms,
+
+    ): false|array
     {
-        $query = "INSERT INTO ads(user_id,title,describtion,status_id,branch_id,address,price,rooms,branch,created_at) 
-                  VALUES (:user_id,:title,:describtion,:status_id,:branch_id,:address,:price,:rooms,:branch,NOW());";
+        $query = "INSERT INTO ads(title,description,address,price,rooms,created_at) 
+VALUES (:title,:description,:address,:price,:rooms,NOW())";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(":user_id",$user_id);
-        $stmt->bindParam(":title",$title);
-        $stmt->bindParam(":describtion",$describtion);
-        $stmt->bindParam(":status_id",$status_id);
-        $stmt->bindParam(":branch_id",$branch_id);
-        $stmt->bindParam(":address",$address);
-        $stmt->bindParam(":price",$price);
-        $stmt->bindParam(":rooms",$rooms);
-        $stmt->bindParam(":branch",$branch);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':description', $description);
+//        $stmt->bindParam(':user_id',$user_id);
+//        $stmt->bindParam(':status_id',$status_id);
+//        $stmt->bindParam(':branch_id',$branch_id);
+        $stmt->bindParam(':address', $address);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':rooms', $rooms);
         $stmt->execute();
 
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getAds(int $id){
-        $query = "SELECT * FROM ads WHERE id = :id;";
+    public function getAd(int $id)
+    {
+        $query = "SELECT * FROM ads WHERE id=:id";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(":id",$id);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateAds(int $id,int $user_id,string $title,string $describtion,string $status_id,int $branch_id,string $address,float $price, int $rooms, string $branch){
-        $query =  "UPDATE ads 
-                   SET user_id = :user_id, title = :title, describtion = :describtion, status_id = :status_id, branch_id = :branch_id, address = :address, price = :price, rooms = :rooms, branch = :branch 
-                   WHERE id = :id;";
+    public function getAds(): array
+    {
+        $query = ("SELECT *, ads.address AS address FROM ads JOIN branch ON branch.id = ads.branch_id");
+        return $this->pdo->query($query)->fetchAll();
+    }
+
+    public function deleteAds(int $id): void
+    {
+        $query = "DELETE FROM ads WHERE id=:id";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(":id",$id);
-        $stmt->bindParam(":user_id",$user_id);
-        $stmt->bindParam(":title",$title);
-        $stmt->bindParam(":describtion",$describtion);
-        $stmt->bindParam(":status_id",$status_id);
-        $stmt->bindParam(":branch_id",$branch_id);
-        $stmt->bindParam(":address",$address);
-        $stmt->bindParam(":price",$price);
-        $stmt->bindParam(":rooms",$rooms);
-        $stmt->bindParam(":branch",$branch);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
 
-    public function deleteAds(int $id){
-        $query = "DELETE FROM ads WHERE id=:id;";
+    public function updateAds(
+        string $title,
+        string $description,
+        int    $status_id,
+        int    $branch_id,
+        string $address,
+        float  $price,
+        int    $rooms,
+    )
+    {
+        $query = "UPDATE ads SET title=:title,description=:description,address=:address,price=:price,rooms=:rooms,updated_at=NOW() 
+           WHERE id=:id";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(":id",$id);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':address', $address);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':rooms', $rooms);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
 }
