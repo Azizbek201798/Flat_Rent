@@ -11,7 +11,7 @@ class User{
         $this->pdo = DB::connect();
     }
 
-    public function create(
+    public function createUser(
         int $id,
         string $username,
         string $position,

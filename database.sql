@@ -33,7 +33,5 @@ CREATE TABLE `branch` (
 );
 
 ALTER TABLE `ads` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
 ALTER TABLE `ads` ADD FOREIGN KEY (`status_id`) REFERENCES `status` (`id`);
-
 ALTER TABLE `ads` ADD FOREIGN KEY (`branch_id`) REFERENCES `branch` (`id`);
