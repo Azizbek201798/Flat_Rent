@@ -4,6 +4,7 @@ declare(strict_types=1);
 loadPartials('header');
 loadPartials('navbar');
 
+//salom
 ?>
 
 <div class="">
