@@ -1,10 +1,11 @@
 <?php
 
 declare(strict_types=1);
+
 loadPartials('header');
 loadPartials('navbar');
-?>
 
+?>
     <div class="page-wrapper toggled">
         <!-- Start Page Content -->
         <main class="page-content bg-gray-50 dark:bg-slate-800">
@@ -252,7 +253,7 @@ loadPartials('navbar');
                                         </div>
                                     </div>
 
-                                    <button type="submit" id="submit" name="send" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5">Add Property</button>
+                                    <button type="submit" id="submit" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5">Add Property</button>
                                 </form>
                             </div>
                         </div>
@@ -277,5 +278,7 @@ loadPartials('navbar');
     </div>
     <!-- page-wrapper -->
 <?php
-loadPartials('footer');
+
+    loadPartials('footer');
+
 ?>

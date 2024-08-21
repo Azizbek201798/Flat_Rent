@@ -9,6 +9,8 @@ $branch      = (int) $_POST['branch'];
 $address     = $_POST['address'];
 $rooms       = (int) $_POST['rooms'];
 
+// dd($_POST);
+
 if ($_POST['title']
     && $_POST['description']
     && $_POST['price']
@@ -39,6 +41,5 @@ if ($_POST['title']
         header('Location: /');
         exit();
     }
-
     return;
 }
