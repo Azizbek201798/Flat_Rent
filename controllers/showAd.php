@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 /** 
- * @var int $id 
+ * @var string $id 
 */
+
 $ad = (new \App\Ads())->getAd($id);
 $ad->image = "../assets/images/ads/$ad->image";
 
