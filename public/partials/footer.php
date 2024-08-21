@@ -120,13 +120,13 @@
         <!-- Back to top -->
 
         <!-- JAVASCRIPTS -->
-        <script src="assets/libs/tiny-slider/min/tiny-slider.js"></script>
-        <script src="assets/libs/tobii/js/tobii.min.js"></script>
-        <script src="assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
-        <script src="assets/libs/swiper/js/swiper.min.js"></script>
-        <script src="assets/libs/feather-icons/feather.min.js"></script>
-        <script src="assets/js/plugins.init.js"></script>
-        <script src="assets/js/app.js"></script>
+        <script src="../assets/libs/tiny-slider/min/tiny-slider.js"></script>
+        <script src="../assets/libs/tobii/js/tobii.min.js"></script>
+        <script src="../assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+        <script src="../assets/libs/swiper/js/swiper.min.js"></script>
+        <script src="../assets/libs/feather-icons/feather.min.js"></script>
+        <script src="../assets/js/plugins.init.js"></script>
+        <script src="../assets/js/app.js"></script>
         <!-- JAVASCRIPTS -->
     </body>
 </html>

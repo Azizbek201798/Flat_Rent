@@ -1,39 +1,121 @@
-<div class="text-center p-10">
-    <h1 class="font-bold text-4xl mb-4">Flats for rent</h1>
-</div>
-<section id="Projects"
-         class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
-    <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-        <a href="/ads/<?= $ad->id ?>">
-            <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA"
-                 style="width: 600px; height: 400px;"
-                 alt="Product" class="h-80 w-72 object-cover rounded-t-xl"/>
-            <div class="px-4 py-3 w-72">
-                <div class="flex">
-                <span class="text-gray-400 mr-3 uppercase text-xs">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20" height="20"
-                         stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/>
-                        </svg>
-                    </span>
-                    <?php echo $ad->address ?>
-                </div>
-                <p class="text-lg font-bold text-black truncate block capitalize"><?php echo $ad->title; ?></p>
-                <div class="flex items-center">
-                    <p class="text-lg font-semibold text-black cursor-auto my-3"><?php echo $ad->price ?>$</p>
-                    <div class="ml-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                             fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                  d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
-                            <path
-                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
-                        </svg>
+<?php
+
+    declare(strict_types=1);
+
+    loadPartials('header');
+    loadPartials('navbar');
+
+    /**
+     * @var $ad
+     */
+
+?>
+        <!-- Start -->
+        <section class="relative md:py-24 pt-24 pb-16">
+            <div class="container relative">
+                <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
+                    <div class="lg:col-span-8 md:col-span-7">
+                        <div class="grid grid-cols-1 relative">
+                            <div class="tiny-one-item">
+                                <div class="tiny-slide">
+                                    <img src="assets/images/property/single/1.jpg" class="rounded-md shadow dark:shadow-gray-700" alt="">
+                                </div>
+                                
+                                <div class="tiny-slide">
+                                    <img src="assets/images/property/single/2.jpg" class="rounded-md shadow dark:shadow-gray-700" alt="">
+                                </div>
+                                
+                                <div class="tiny-slide">
+                                    <img src="assets/images/property/single/3.jpg" class="rounded-md shadow dark:shadow-gray-700" alt="">
+                                </div>
+                                
+                                <div class="tiny-slide">
+                                    <img src="assets/images/property/single/4.jpg" class="rounded-md shadow dark:shadow-gray-700" alt="">
+                                </div>
+                                
+                                <div class="tiny-slide">
+                                    <img src="assets/images/property/single/5.jpg" class="rounded-md shadow dark:shadow-gray-700" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-2xl font-medium mt-6 mb-3"><?php echo $ad->title; ?></h4>
+                        <span class="text-slate-400 flex items-center"><i data-feather="map-pin" class="size-5 me-2"></i><?php echo $ad->address;?></span>
+
+                        <ul class="py-6 flex items-center list-none">
+                            <li class="flex items-center lg:me-6 me-4">
+                                <i class="uil uil-compress-arrows lg:text-3xl text-2xl me-2 text-green-600"></i>
+                                <span class="lg:text-xl">8000sqf</span>
+                            </li>
+
+                            <li class="flex items-center lg:me-6 me-4">
+                                <i class="uil uil-bed-double lg:text-3xl text-2xl me-2 text-green-600"></i>
+                                <span class="lg:text-xl">4 Beds</span>
+                            </li>
+
+                            <li class="flex items-center">
+                                <i class="uil uil-bath lg:text-3xl text-2xl me-2 text-green-600"></i>
+                                <span class="lg:text-xl"><?php echo $ad->rooms; ?> xona</span>
+                            </li>
+                        </ul>
+
+                        <p class="text-slate-400"><?php echo $ad->describtion;?></p>
+                    
+                        <div class="w-full leading-[0] border-0 mt-6">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39206.002432144705!2d-95.4973981212445!3d29.709510002925988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c16de81f3ca5%3A0xf43e0b60ae539ac9!2sGerald+D.+Hines+Waterwall+Park!5e0!3m2!1sen!2sin!4v1566305861440!5m2!1sen!2sin" style="border:0" class="w-full h-[500px]" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-4 md:col-span-5">
+                        <div class="sticky top-20">
+                            <div class="rounded-md bg-slate-50 dark:bg-slate-800 shadow dark:shadow-gray-700">
+                                <div class="p-6">
+                                    <h5 class="text-2xl font-medium">Narxi:</h5>
+    
+                                    <div class="flex justify-between items-center mt-4">
+                                        <span class="text-xl font-medium"><?php echo $ad->price; ?></span>
+    
+                                        <span class="bg-green-600/10 text-green-600 text-sm px-2.5 py-0.75 rounded h-6"><?php echo $ad->status_id; ?></span>
+                                    </div>
+    
+                                    <ul class="list-none mt-4">
+                                        <li class="flex justify-between items-center">
+                                            <span class="text-slate-400 text-sm">Days on Hously</span>
+                                            <span class="font-medium text-sm">124 Days</span>
+                                        </li>
+    
+                                        <li class="flex justify-between items-center mt-2">
+                                            <span class="text-slate-400 text-sm">Filial:</span>
+                                            <span class="font-medium text-sm"><?php echo $ad->branch_id; ?></span>
+                                        </li>
+    
+                                        <li class="flex justify-between items-center mt-2">
+                                            <span class="text-slate-400 text-sm">Sana</span>
+                                            <span class="font-medium text-sm"><?php echo $ad->created_at; ?></span>
+                                        </li>
+                                    </ul>
+                                </div>
+    
+                                <div class="flex">
+                                    <div class="p-1 w-1/2">
+                                        <a href="" class="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">Book Now</a>
+                                    </div>
+                                    <div class="p-1 w-1/2">
+                                        <a href="" class="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">Offer Now</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-12 text-center">
+                                <h3 class="mb-6 text-xl leading-normal font-medium text-black dark:text-white">Have Question ? Get in touch!</h3>
+
+                                <div class="mt-6">
+                                    <a href="contact.html" class="btn bg-transparent hover:bg-green-600 border border-green-600 text-green-600 hover:text-white rounded-md"><i class="uil uil-phone align-middle me-2"></i> Contact us</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </a>
-    </div>
-</section>
+        </section><!--end section-->
+        <!-- End -->

@@ -7,5 +7,5 @@ Router::get('/', fn()=>loadController('home'));
 Router::get('/ads/{id}', function (int $id){
    loadController('showAd', ['id' => $id]);
 });
-Router::get('/ads/create',fn() => loadView('admin/create_ad'));
+Router::get('/ads/create',fn() => loadView('dashboard/create_ad'));
 Router::post('/ads/create',fn() => loadController('createAd'));
