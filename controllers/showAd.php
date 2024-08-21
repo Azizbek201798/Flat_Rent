@@ -1,10 +1,11 @@
 <?php
 
 declare(strict_types=1);
+/**
+ * @var $id
+ */
 
-// @var TYPE_NAME $id 
-
-$ads = new App\Ads();
-$ad = $ads->getAd($id);
+$ad        = (new \App\Ads())->getAd($id);
+$ad->image = "../assets/images/ads/$ad->image";
 
 loadView('single-ad', ['ad' => $ad]);
