@@ -14,13 +14,7 @@ if ($_POST['title']
     && $_POST['price']
     && $_POST['address']
     && $_POST['rooms']
-) {
-
-
-    // 1. Store Ad
-    // 2. Upload Image
-    // 3. Store Image(adId, name)
-    // 4 .Redirect
+){
 
     $newAdsId = (new \App\Ads())->createAds(
         $title,
@@ -42,13 +36,9 @@ if ($_POST['title']
         }
 
         $imageHandler->addImage((int)$newAdsId, $fileName);
-
         header('Location: /');
-
         exit();
     }
 
     return;
 }
-
-echo "Iltimos, barcha maydonlarni to'ldiring!";
