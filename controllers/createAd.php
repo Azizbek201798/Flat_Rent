@@ -16,6 +16,7 @@ if ($_POST['title']
     && $_POST['rooms']
 ) {
 
+
     // 1. Store Ad
     // 2. Upload Image
     // 3. Store Image(adId, name)
