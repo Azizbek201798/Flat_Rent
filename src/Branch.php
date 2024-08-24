@@ -37,6 +37,11 @@ class Branch
         $stmt->execute();
         return $stmt->fetch();
     }
+    public function getBranches()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM branch");
+        return $stmt->fetchAll();
+    }
 
     public function deleteBranch(int $id):bool
     {

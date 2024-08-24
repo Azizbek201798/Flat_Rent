@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-$title       = $_POST['title'];
+$title       = // dd($_POST);
+$_POST['title'];
 $description = $_POST['description'];
 $price       = (float) $_POST['price'];
 $branch      = (int) $_POST['branch'];
 $address     = $_POST['address'];
 $rooms       = (int) $_POST['rooms'];
-
-// dd($_POST);
 
 if ($_POST['title']
     && $_POST['description']

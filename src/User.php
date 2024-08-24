@@ -1,9 +1,7 @@
 <?php
 
 declare(strict_types=1);
-
 namespace App;
-
 use PDO;
 
 class User
@@ -12,7 +10,7 @@ class User
 
     public function __construct()
     {
-        $this->pdo = Db::connect();
+        $this->pdo = DB::connect();
     }
 
     public function createUser(
@@ -67,4 +65,64 @@ class User
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
+
+// Authorization;
+   public function login(string $email)
+   {
+
+    $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
+       $stmt->bindParam(':email', $email);
+       $stmt->execute();
+
+       return $stmt->fetch(PDO::FETCH_ASSOC);
+   }
+
+   public function logout()
+   {
+       session_destroy();
+       redirect('/login');
+   }
+
+   public function register(string $username, string $email, string $password):bool
+   {
+       if ($this->isUserExists()) {
+           $_SESSION["login_error"] = 'User already exists';
+           header("Location: /register");
+           return false;
+       }
+
+       $user = $this->create($username, $email, $password);
+       if ($user) {
+           $_SESSION['user'] = $user['email'];
+           redirect('/');
+       }
+       return true;
+   }
+
+   public function isUserExists(): bool
+   {
+       if (isset($_POST['email'])) {
+           $email = $_POST['email'];
+           $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
+           $stmt->bindParam(':email', $email);
+           $stmt->execute();
+           return (bool)$stmt->fetch();
+       }
+       return false;
+   }
+
+   public function create(string $username, string $email, string $password)
+   {
+           $stmt = $this->pdo->prepare("INSERT INTO `users` (`username`,`email`, `password`) VALUES (:username,:email, :password)");
+           $stmt->bindParam(':username', $username);
+           $stmt->bindParam(':email', $email);
+           $stmt->bindParam(':password', $password);
+           $stmt->execute();
+
+           $stmt = $this->pdo->prepare("SELECT * FROM `users` WHERE `email` = :email");
+           $stmt->bindParam(':email', $email);
+           $stmt->execute();
+
+           return $stmt->fetch(PDO::FETCH_ASSOC);
+   }
 }

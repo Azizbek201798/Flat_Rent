@@ -1,47 +1,87 @@
 <?php
 
 declare(strict_types=1);
-
 namespace App;
+use PDO;
 
 class Status
 {
-    private \PDO $pdo;
+    private PDO $pdo;
 
     public function __construct()
     {
         $this->pdo = DB::connect();
     }
 
-
-    public function createStatus(string $name): bool
+    public function createStatus(string $name): false|string 
     {
-        $stmt = $this->pdo->prepare("INSERT INTO status (name, created_at) VALUES (:name, NOW())");
+        $query = "INSERT INTO status (id,name) 
+                  VALUES (:id,:name)";
+        $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':name', $name);
-        return $stmt->execute();
-    }
-
-
-    public function updateStatus(int $id, string $name): bool
-    {
-        $stmt = $this->pdo->prepare("UPDATE status SET name = :name WHERE id = :id");
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':id', $id);
-        return $stmt->execute();
-    }
-
-    public function getStatus(int $id)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM status WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
+
+        return $this->pdo->lastInsertId();
+    }
+
+    public function getStatus($id)
+    {
+        $query = "SELECT ads.*, name AS image
+                  FROM ads
+                    JOIN ads_image ON ads.id = ads_image.ads_id
+                  WHERE ads.id = :id";
+
+        $stmt  = $this->pdo->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
         return $stmt->fetch();
     }
 
-    public function deleteStatus(int $id): bool
+    public function getStatuses(): false|array
     {
-        $stmt = $this->pdo->prepare("DELETE FROM status WHERE id = :id");
-        $stmt->bindParam(':id', $id);
-        return $stmt->execute();
+        $query = "SELECT *, ads.id AS id, ads.address AS address FROM ads JOIN branch ON branch.id = ads.branch_id";
+         return $this->pdo->query($query)->fetchAll();
     }
+
+    // public function updateAds(
+    //     int    $id,
+    //     string $title,
+    //     string $description,
+    //     int    $user_id,
+    //     int    $status_id,
+    //     int    $branch_id,
+    //     string $address,
+    //     float  $price,
+    //     int    $rooms
+    // ) {
+    //     $query = "UPDATE ads SET title = :title, description = :description, user_id = :user_id,
+    //              status_id = :status_id, branch_id = :branch_id, address = :address, 
+    //              price = :price, rooms = :rooms, updated_at = NOW() WHERE id = :id";
+
+    //     $stmt = $this->pdo->prepare($query);
+    //     $stmt->bindParam(':id', $id);
+    //     $stmt->bindParam(':title', $title);
+    //     $stmt->bindParam(':description', $description);
+    //     $stmt->bindParam(':user_id', $user_id);
+    //     $stmt->bindParam(':status_id', $status_id);
+    //     $stmt->bindParam(':branch_id', $branch_id);
+    //     $stmt->bindParam(':address', $address);
+    //     $stmt->bindParam(':price', $price);
+    //     $stmt->bindParam(':rooms', $rooms);
+    //     $stmt->execute();
+
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
+
+    // public function deleteAds(int $id): array|false
+    // {
+    //     $query = "DELETE FROM ads WHERE id = :id";
+    //     $stmt  = $this->pdo->prepare($query);
+    //     $stmt->bindParam(':id', $id);
+    //     $stmt->execute();
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
+
 }
